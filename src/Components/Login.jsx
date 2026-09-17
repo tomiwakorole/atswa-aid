@@ -5,7 +5,7 @@ function Login({ onSwitchToSignUp }) {
     const [showPassword, setShowPassword] = useState(false);
 
     return (
-        <div className="login-page">
+        <div className="signin-page">
             <div className="signin-shell">
                 <div className="portal-brand">
                     <div className="brand-mark">A</div>
