@@ -2,15 +2,15 @@ import React from "react";
 import "../Styles/ProfileSettings.css";
 
 const navItems = [
-    { label: "Dashboard", icon: "◫" },
-    { label: "My Profile", icon: "◉" },
-    { label: "Subjects / Courses", icon: "▣" },
-    { label: "Exams", icon: "✓" },
-    { label: "Questions & Practice", icon: "✎" },
-    { label: "Results & Analytics", icon: "▤" },
-    { label: "Study Materials", icon: "◍" },
-    { label: "Notifications", icon: "◔" },
-    { label: "Settings", icon: "⚙" },
+    { label: "Dashboard", icon: "◫", route: "dashboard" },
+    { label: "My Profile", icon: "◉", route: "profile" },
+    { label: "Subjects / Courses", icon: "▣", route: "courses" },
+    { label: "Exams", icon: "✓", route: "exams" },
+    { label: "Questions & Practice", icon: "✎", route: "practice" },
+    { label: "Results & Analytics", icon: "▤", route: "results" },
+    { label: "Study Materials", icon: "◍", route: "materials" },
+    { label: "Notifications", icon: "◔", route: "notifications" },
+    { label: "Settings", icon: "⚙", route: "settings" },
 ];
 
 const programCards = [
@@ -32,7 +32,7 @@ const miniCards = [
     { title: "Study Progress", subtitle: "Completion", value: "81%" },
 ];
 
-function ProfileSettings({ user, onLogout }) {
+function ProfileSettings({ user, onLogout, onNavigate, activeItem = "profile" }) {
     const activeUser = user || {
         fullName: "Adeola Oladipo",
         studentId: "ATS-00124",
@@ -81,11 +81,16 @@ function ProfileSettings({ user, onLogout }) {
                 <aside className="side-menu">
                     <div className="menu-brand">ATSWA AID</div>
                     <nav className="nav-list">
-                        {navItems.map((item, index) => (
+                        {navItems.map((item) => (
                             <button
                                 key={item.label}
                                 type="button"
-                                className={`nav-item ${index === 1 ? "active" : ""}`}
+                                className={`nav-item ${item.route === activeItem ? "active" : ""}`}
+                                onClick={() => {
+                                    if (onNavigate && item.route) {
+                                        onNavigate(item.route);
+                                    }
+                                }}
                             >
                                 <span className="nav-icon">{item.icon}</span>
                                 <span>{item.label}</span>
